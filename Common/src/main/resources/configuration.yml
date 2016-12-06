@@ -1,0 +1,36 @@
+DisignStudio:
+  [all]:
+    mysql.rw.maxWait: -1
+    mysql.rw.minIdle: 0
+    mysql.rw.validationQuery: select 1
+    mysql.rw.testWhileIdle: false
+    mysql.rw.testOnReturn: false
+    mysql.rw.testOnBorrow: true
+    mysql.rw.minEvitableIdleTimeMillis: -1
+    mysql.rw.removeAbandoned: false
+    mysql.rw.removeAbandonedTimeout: 450
+    mysql.rw.autoCommit: true
+    mysql.rw.numTetsPerEvictionRun: 3
+    mysql.rw.logAbandoned: false
+    mysql.rw.driverClassName: org.gjt.mm.mysql.Driver
+    mysql.rw.initialSize: 1
+    mysql.rw.maxActive: -1
+    mysql.rw.maxIdle: 10
+    cloudinary.cloud_name: disignstudio
+    cloudinary.api_key: 671623578364648
+    cloudinary.api_secret: u7Js93fJnrF1bvZ__RuGqUGRk7w
+    redirect.imaging-template: <html><head><title>$TITLE$</title></head><body><script type="text/javascript">window.location = "$URL$"</script></body></html>
+    project.num.designs.to.serve: 20
+  [dev]:
+    mysql.rw.url: jdbc:mysql://localhost/dev2
+    mysql.rw.username: root
+    mysql.rw.password: dsdev
+    mongodb.stats.uri: mongodb://localhost/disignstudio
+    redirect.base.url: http://localhost:8080/api/redirect/imaging?pId=%d&atId=%d&dId=%d&src=%s
+  [prod]:
+    mysql.rw.url: jdbc:mysql://tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z9jz5yqxxbm2m74w
+    mysql.rw.username: oimfbzmy3qkwc8hg
+    mysql.rw.password: oenvaidx9zihhqmu
+    mongodb.stats.uri: mongodb://disignstudio:d1s1gnstud10@ds015770.mlab.com:15770/heroku_gq749psx
+    redirect.base.url: http://projects.disignstudio.com/api/redirect/imaging?pId=%d&atId=%d&dId=%d&src=%s
+

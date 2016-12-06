@@ -1,0 +1,13 @@
+* Graphite - Reporter
+* Takipi
+* APT
+
+* Shared links - open using our app rather then chrome (branch.io)
+* Log impressions to mongo (in separate thread)
+
+QA
+
+* App functionality
+* Mixpanel stats
+* DS Stats (Views from two sources, actions: both share and info)
+* Redirect & views

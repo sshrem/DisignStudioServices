@@ -1,0 +1,22 @@
+DisignStudio:
+  [all]:
+    prop1: 1a
+    prop2: 2a
+    prop3: 3a
+    prop4: 4a
+    prop5: 5a
+  [dev]:
+    prop2: 2b
+    prop3: 3b
+    prop4: 4b
+    prop5: 5b
+testApp:
+  [all]:
+    prop3: 3c
+    prop5: 5c
+  [dev]:
+    prop4: 4d
+    prop5: 5d
+  [test]:
+    prop5: 5e
+    prop6: 6f

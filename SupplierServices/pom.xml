@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.disignstudio</groupId>
+    <artifactId>SupplierServices</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>SupplierServices</name>
+
+    <parent>
+        <groupId>com.disignstudio</groupId>
+        <artifactId>DisignStudio</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+
+        <!-- DisignStudio Libs -->
+        <dependency>
+            <groupId>com.disignstudio</groupId>
+            <artifactId>WebLib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.disignstudio</groupId>
+            <artifactId>Common</artifactId>
+        </dependency>
+
+        <!-- Server -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-core</artifactId>
+        </dependency>
+
+        <!-- 3rd Party -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,41 @@
+mainHtml(versionInfo) ::= <<
+<html>
+    <head>
+        <title>Servlet's version</title>
+        <style>
+          body {
+            font-family:courier new;
+            font-size: 10pt
+          }
+          table {
+            width:100%
+          }
+          td {
+            background-color:#eee;
+          }
+        </style>
+    </head>
+    <body>
+        <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>revision</th>
+            <th>timestamp</th>
+            <th>specification version</th>
+            <th>createdBy</th>
+            <th>builtBy</th>
+            <th>builtJdk</th>
+            <th>specTitle</th>
+            <th>specVendor</th>
+          </tr>
+          </thead>
+          <tbody>
+            $versionInfo:{ vi |
+              <tr><td>$vi.id$</td><td>$vi.revision$</td><td>$vi.timestamp$</td><td>$vi.specVersion$</td><td>$vi.createdBy$</td><td>$vi.builtBy$</td><td>$vi.buildJdk$</td><td>$vi.specTitle$</td><td>$vi.specVendor$</td></tr>
+            }$
+          </tbody>
+        </table>
+    </body>
+</html>
+>>

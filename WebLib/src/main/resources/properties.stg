@@ -1,0 +1,32 @@
+mainHtml(props) ::= <<
+<html>
+    <head>
+        <title>Servlet's properties</title>
+        <style>
+          body {
+            font-family:courier new;
+            font-size: 10pt
+          }
+          table {
+            width:100%
+          }
+          td {
+            background-color:#eee;
+          }
+        </style>
+    </head>
+    <body>
+        <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+          </tr>
+          </thead>
+          <tbody>
+            $props.keys:{k | <tr><td style='font-weight:bold'>$k$</td><td>$props.(k)$</td></tr>}$
+          </tbody>
+        </table>
+     </body>
+</html>
+>>
