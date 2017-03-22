@@ -12,12 +12,15 @@ public class ProjectDataWrapper implements Serializable {
     private EntrepreneurData entrepreneur;
     private List<String> projectFeatures;
     private List<ApartmentTemplateData> apartmentTemplates;
+    private List<VideoDetailsData> videoDetails;
 
-    public ProjectDataWrapper(ProjectData project, EntrepreneurData entrepreneur, List<String> projectFeatures, List<ApartmentTemplateData> apartmentTemplates) {
+    public ProjectDataWrapper(ProjectData project, EntrepreneurData entrepreneur, List<String> projectFeatures,
+                              List<ApartmentTemplateData> apartmentTemplates, List<VideoDetailsData> videoDetails) {
         this.project = project;
         this.entrepreneur = entrepreneur;
         this.projectFeatures = projectFeatures;
         this.apartmentTemplates = apartmentTemplates;
+        this.videoDetails = videoDetails;
     }
 
     public ProjectData getProject() {
@@ -50,5 +53,13 @@ public class ProjectDataWrapper implements Serializable {
 
     public void setApartmentTemplates(List<ApartmentTemplateData> apartmentTemplates) {
         this.apartmentTemplates = apartmentTemplates;
+    }
+
+    public List<VideoDetailsData> getVideoDetails() {
+        return videoDetails;
+    }
+
+    public void setVideoDetails(List<VideoDetailsData> videoDetails) {
+        this.videoDetails = videoDetails;
     }
 }

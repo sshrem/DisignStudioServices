@@ -10,6 +10,7 @@ import com.disignstudio.project.cache.DesignsCacheLoader;
 import com.disignstudio.project.cache.ProjectCacheLoader;
 import com.disignstudio.project.cache.pojo.*;
 import com.disignstudio.project.db.bean.helper.EDesignFilter;
+import com.disignstudio.project.loader.data.VideoDetailsData;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -18,6 +19,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by ohadbenporat on 5/17/16.
@@ -43,11 +45,13 @@ public class MobileDesignsFiltersRequestHandler {
 
         ProjectCachedData projectData = cacheClient.getOrLoad(request.getProjId(), projectCacheLoader, request.isUseCache());
         ApartmentTemplateCachedData apartmentTemplateCachedData = loadApartmentTemplate(projectData.getApartmentTemplateCachedData(), request.getAtId());
+        List<VideoDetailsData> videosDetails = loadVideoDetails(projectData.getVideoDetails(), request.getAtId()) ;
 
         DesignsCachedData allDesignsData = cacheClient.getOrLoad(request.getAtId(), designsCacheLoader, request.isUseCache());
         Pair<List<SupplierSummary>, List<RoomItemSummary>> designsData = extractDataFromDesigns(allDesignsData.getDesigns());
 
-        return new MobileDesignFiltersResponse(apartmentTemplateCachedData.getName(), designsData.getLeft(), designsData.getRight());
+        return new MobileDesignFiltersResponse(apartmentTemplateCachedData.getName(), designsData.getLeft(),
+            designsData.getRight(), videosDetails);
     }
 
     private Pair<List<SupplierSummary>, List<RoomItemSummary>> extractDataFromDesigns(List<DesignCachedData> designs) {
@@ -120,4 +124,11 @@ public class MobileDesignsFiltersRequestHandler {
 
         return null;
     }
+
+    private List<VideoDetailsData> loadVideoDetails(List<VideoDetailsData> videosDetails, long apartmentTemplateId) {
+        return videosDetails.stream()
+            .filter(v -> v.getApartmentTemplateId() == apartmentTemplateId).collect(Collectors.toList());
+    }
+
+
 }

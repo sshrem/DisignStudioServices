@@ -59,7 +59,8 @@ public class ProjectServicesServer extends Application<ConfigurationProvider> {
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
-        List<Module> injectorModules = Lists.newArrayList(new OpsModule(configuration), new MongoModule(configuration), new DatabaseModule(configuration), new ProjectServicesServerModule(configuration));
+        List<Module> injectorModules = Lists.newArrayList(new OpsModule(configuration), new MongoModule(configuration),
+            new DatabaseModule(configuration), new ProjectServicesServerModule(configuration));
         Injector injector = Guice.createInjector(injectorModules);
         env.jersey().register(injector.getInstance(OpsAPI.class));
         env.jersey().register(injector.getInstance(ProjectsCRUDAPI.class));

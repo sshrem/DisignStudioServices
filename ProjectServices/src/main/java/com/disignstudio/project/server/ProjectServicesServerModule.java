@@ -57,6 +57,7 @@ public class ProjectServicesServerModule implements Module {
         binder.bind(IImagingViewDao.class).to(ImagingViewDaoImpl.class);
         binder.bind(IUserActionDao.class).to(UserActionDaoImpl.class);
         binder.bind(IViewSupplierDao.class).to(ViewSupplierDaoImpl.class);
+        binder.bind(IVideoDetailsDao.class).to(VideoDetailsDaoImpl.class);
         binder.bind(Cloudinary.class).toInstance(new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", configurationProvider.provideProperty("cloudinary.cloud_name"),
                 "api_key", configurationProvider.provideProperty("cloudinary.api_key"),

@@ -3,7 +3,6 @@ package com.disignstudio.project.cache;
 import com.disignstudio.common.cache.EntityCacheKey;
 import com.disignstudio.common.cache.ICacheLoader;
 import com.disignstudio.common.utils.CloudinaryUtils;
-import com.disignstudio.project.api.response.ApartmentSummary;
 import com.disignstudio.project.cache.pojo.ApartmentTemplateCachedData;
 import com.disignstudio.project.cache.pojo.EntrepreneurCachedData;
 import com.disignstudio.project.cache.pojo.ProjectCachedData;
@@ -48,7 +47,8 @@ public class ProjectCacheLoader implements ICacheLoader {
 
         return new ProjectCachedData(projectData.getProject().getId(), projectData.getProject().getCode(), projectData.getProject().getName(), projectData.getProject().getAbout()
                 , projectData.getProject().getAddress(), projectData.getProject().getLon(), projectData.getProject().getLat(), projectLogo, projectImage,
-                projectData.getProject().getSalesContact().getPhone(), projectData.getProject().getCountryId(), projectData.getProject().getCityId(), entrepreneurCachedData, projectData.getProjectFeatures(), apartmentTemplatesCachedData);
+                projectData.getProject().getSalesContact().getPhone(), projectData.getProject().getCountryId(), projectData.getProject().getCityId(),
+            entrepreneurCachedData, projectData.getProjectFeatures(), apartmentTemplatesCachedData, projectData.getVideoDetails());
     }
 
     private List<ApartmentTemplateCachedData> buildApartmentTemplateCachedData(String projectCode, List<ApartmentTemplateData> apartmentTemplates) {

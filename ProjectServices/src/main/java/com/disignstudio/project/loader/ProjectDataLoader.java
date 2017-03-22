@@ -4,6 +4,7 @@ import com.disignstudio.project.db.bean.ApartmentTemplate;
 import com.disignstudio.project.db.bean.Contact;
 import com.disignstudio.project.db.bean.Entreprenuer;
 import com.disignstudio.project.db.bean.ProjectFeature;
+import com.disignstudio.project.db.bean.VideoDetails;
 import com.disignstudio.project.db.bean.extended.ProjectExtended;
 import com.disignstudio.project.db.dao.*;
 import com.disignstudio.project.loader.data.*;
@@ -11,6 +12,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ohadbenporat on 2/4/16.
@@ -22,15 +24,17 @@ public class ProjectDataLoader {
     private IEntrepreneurDao entrepreneurDao;
     private IProjectFeatureDao projectFeatureDao;
     private IContactDao contactDao;
+    private IVideoDetailsDao videoDetailsDao;
 
     @Inject
     public ProjectDataLoader(IProjectDao projectDao, IApartmentTemplateDao apartmentTemplateDao, IEntrepreneurDao entrepreneurDao,
-                             IProjectFeatureDao projectFeatureDao, IContactDao contactDao) {
+                             IProjectFeatureDao projectFeatureDao, IContactDao contactDao, IVideoDetailsDao videoDetailsDao) {
         this.projectDao = projectDao;
         this.apartmentTemplateDao = apartmentTemplateDao;
         this.entrepreneurDao = entrepreneurDao;
         this.projectFeatureDao = projectFeatureDao;
         this.contactDao = contactDao;
+        this.videoDetailsDao = videoDetailsDao;
     }
 
     public ProjectDataWrapper loadProjectData(long projId) {
@@ -48,8 +52,9 @@ public class ProjectDataLoader {
         EntrepreneurData entreprenuer = loadEntreprenuer(project.getEntrepreneur());
         List<ApartmentTemplateData> apartmentTemplates = loadApartmentTemplates(project.getId());
         List<String> projectFeatures = loadProjectFeatures(project.getId());
+        List<VideoDetailsData> videoDetails = loadVideoDetails(project.getId());
 
-        return new ProjectDataWrapper(projectData, entreprenuer, projectFeatures, apartmentTemplates);
+        return new ProjectDataWrapper(projectData, entreprenuer, projectFeatures, apartmentTemplates, videoDetails);
     }
 
     private List<String> loadProjectFeatures(long projectId) {
@@ -79,6 +84,12 @@ public class ProjectDataLoader {
         }
 
         return allData;
+    }
+
+    private List<VideoDetailsData> loadVideoDetails(long projectId){
+        List<VideoDetails> videoDetails = videoDetailsDao.findByProject(projectId);
+        return videoDetails.stream().map(v -> new VideoDetailsData(v.getId(), v.getProjectId(), v.getApartmentTemplateId(), v.getRoomId(), v.getVideoLength()))
+            .collect(Collectors.toList());
     }
 
     private EntrepreneurData loadEntreprenuer(long entrepreneurId) {

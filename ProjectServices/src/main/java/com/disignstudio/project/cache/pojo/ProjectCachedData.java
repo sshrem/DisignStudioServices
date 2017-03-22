@@ -1,5 +1,7 @@
 package com.disignstudio.project.cache.pojo;
 
+import com.disignstudio.project.loader.data.VideoDetailsData;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,8 +25,12 @@ public class ProjectCachedData implements Serializable {
     private EntrepreneurCachedData entrepreneurCachedData;
     private List<String> features;
     private List<ApartmentTemplateCachedData> apartmentTemplateCachedData;
+    private List<VideoDetailsData> videoDetails;
 
-    public ProjectCachedData(long projectId, String code, String name, String about, String location, double lon, double lat, String logo, String imageUrl, String salesPhone, int countryId, int cityId, EntrepreneurCachedData entrepreneurCachedData, List<String> features, List<ApartmentTemplateCachedData> apartmentTemplateCachedData) {
+    public ProjectCachedData() {
+    }
+
+    public ProjectCachedData(long projectId, String code, String name, String about, String location, double lon, double lat, String logo, String imageUrl, String salesPhone, int countryId, int cityId, EntrepreneurCachedData entrepreneurCachedData, List<String> features, List<ApartmentTemplateCachedData> apartmentTemplateCachedData, List<VideoDetailsData> videoDetails) {
         this.projectId = projectId;
         this.code = code;
         this.name = name;
@@ -40,6 +46,7 @@ public class ProjectCachedData implements Serializable {
         this.entrepreneurCachedData = entrepreneurCachedData;
         this.features = features;
         this.apartmentTemplateCachedData = apartmentTemplateCachedData;
+        this.videoDetails = videoDetails;
     }
 
     public long getProjectId() {
@@ -160,5 +167,13 @@ public class ProjectCachedData implements Serializable {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public List<VideoDetailsData> getVideoDetails() {
+        return videoDetails;
+    }
+
+    public void setVideoDetails(List<VideoDetailsData> videoDetails) {
+        this.videoDetails = videoDetails;
     }
 }

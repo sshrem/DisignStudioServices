@@ -1,5 +1,7 @@
 package com.disignstudio.project.api.response;
 
+import com.disignstudio.project.loader.data.VideoDetailsData;
+
 import java.util.List;
 
 /**
@@ -10,11 +12,16 @@ public class MobileDesignFiltersResponse {
     private String title;
     private List<SupplierSummary> suppliers;
     private List<RoomItemSummary> roomItems;
+    private List<VideoDetailsData> videosDetails;
 
-    public MobileDesignFiltersResponse(String title, List<SupplierSummary> suppliers, List<RoomItemSummary> roomItems) {
+    public MobileDesignFiltersResponse() {
+    }
+
+    public MobileDesignFiltersResponse(String title, List<SupplierSummary> suppliers, List<RoomItemSummary> roomItems, List<VideoDetailsData> videosDetails) {
         this.title = title;
         this.suppliers = suppliers;
         this.roomItems = roomItems;
+        this.videosDetails = videosDetails;
     }
 
     public String getTitle() {
@@ -39,5 +46,13 @@ public class MobileDesignFiltersResponse {
 
     public void setRoomItems(List<RoomItemSummary> roomItems) {
         this.roomItems = roomItems;
+    }
+
+    public List<VideoDetailsData> getVideosDetails() {
+        return videosDetails;
+    }
+
+    public void setVideosDetails(List<VideoDetailsData> videosDetails) {
+        this.videosDetails = videosDetails;
     }
 }
