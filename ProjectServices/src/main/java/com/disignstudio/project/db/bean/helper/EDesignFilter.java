@@ -5,8 +5,8 @@ package com.disignstudio.project.db.bean.helper;
  */
 public enum EDesignFilter {
 
-    BEDROOM_FLOOR("choosebedroomfloor", ERoom.BEDROOM, ECategory.FLOORING),
     LIVING_FLOOR("chooselivingroomfloor", ERoom.LIVINGROOM, ECategory.FLOORING),
+    BEDROOM_FLOOR("choosebedroomfloor", ERoom.BEDROOM, ECategory.FLOORING),
     BATHROOM_FLOOR("choosebathroomfloor", ERoom.BATHROOM, ECategory.FLOORING),
     BATHROOM_CLADDING("choosebathroomcladding", ERoom.BATHROOM, ECategory.CLADDING);
 
