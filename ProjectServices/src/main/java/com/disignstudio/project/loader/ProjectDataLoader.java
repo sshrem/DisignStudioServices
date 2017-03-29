@@ -79,7 +79,7 @@ public class ProjectDataLoader {
 
         List<ApartmentTemplateData> allData = Lists.newArrayList();
         for (ApartmentTemplate apt : aptmtTemplates) {
-            ApartmentTemplateData data = new ApartmentTemplateData(apt.getId(), apt.getCode(), apt.getName(), apt.getImage(), apt.getNumOfRooms());
+            ApartmentTemplateData data = new ApartmentTemplateData(apt.getId(), apt.getCode(), apt.getName(), apt.getImage(), apt.getNumOfRooms(), apt.getDefaultFacebookVideoUrl());
             allData.add(data);
         }
 

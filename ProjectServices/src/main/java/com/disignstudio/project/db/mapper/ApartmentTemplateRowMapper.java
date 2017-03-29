@@ -14,6 +14,7 @@ public class ApartmentTemplateRowMapper implements RowMapper<ApartmentTemplate> 
     @Override
     public ApartmentTemplate mapRow(ResultSet rs, int i) throws SQLException {
         return new ApartmentTemplate(rs.getLong("dsat_id"), rs.getString("dsat_code"), rs.getLong("dsat_project_id"),
-                rs.getString("dsat_name"), rs.getString("dsat_image"), rs.getInt("dsat_num_of_rooms"));
+                rs.getString("dsat_name"), rs.getString("dsat_image"), rs.getInt("dsat_num_of_rooms"),
+                rs.getString("dsat_default_facebook_video_url"));
     }
 }

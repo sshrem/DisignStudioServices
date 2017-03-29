@@ -17,7 +17,7 @@ import java.util.Map;
 public class ApartmentTemplateDaoImpl implements IApartmentTemplateDao {
 
     private static final String TABLE_NAME = "dsat_apartment_templates";
-    private static final String UPDATE_APARTMENT_TEMPLATE_QUERY = "update dsat_apartment_templates set dsat_project_id=?,dsat_name=?, dsat_image = ?, dsat_num_of_rooms = ? where dsat_id = ?";
+    private static final String UPDATE_APARTMENT_TEMPLATE_QUERY = "update dsat_apartment_templates set dsat_project_id=?,dsat_name=?, dsat_image = ?, dsat_num_of_rooms = ?, dsat_default_facebook_video_url = ? where dsat_id = ?";
     private static final String FIND_APARTMENT_TEMPLATE_BY_ID_QUERY = "select * from dsat_apartment_templates where dsat_id = %d";
     private static final String FIND_APARTMENT_TEMPLATE_BY_PROJECT_ID_QUERY = "select * from dsat_apartment_templates where dsat_project_id = %d";
     private static final String FIND_APARTMENT_TEMPLATE_BY_CODE = "select * from dsat_apartment_templates where dsat_code = '%s'";
@@ -41,7 +41,7 @@ public class ApartmentTemplateDaoImpl implements IApartmentTemplateDao {
             return aptTmpl.getId();
         } else {
             SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate).withTableName(TABLE_NAME).usingColumns("dsat_code", "dsat_project_id",
-                    "dsat_name", "dsat_image", "dsat_num_of_rooms").usingGeneratedKeyColumns("dsat_id");
+                    "dsat_name", "dsat_image", "dsat_num_of_rooms", "dsat_default_facebook_video_url").usingGeneratedKeyColumns("dsat_id");
 
             Map<String, Object> insertParameters = new HashMap<>();
             insertParameters.put("dsat_code", aptTmpl.getCode());
@@ -49,6 +49,7 @@ public class ApartmentTemplateDaoImpl implements IApartmentTemplateDao {
             insertParameters.put("dsat_name", aptTmpl.getName());
             insertParameters.put("dsat_image", aptTmpl.getImage());
             insertParameters.put("dsat_num_of_rooms", aptTmpl.getNumOfRooms());
+            insertParameters.put("dsat_default_facebook_video_url", aptTmpl.getDefaultFacebookVideoUrl());
             Number generatedId = insert.executeAndReturnKey(insertParameters);
             return generatedId.longValue();
         }

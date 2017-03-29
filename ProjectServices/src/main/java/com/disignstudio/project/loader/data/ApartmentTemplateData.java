@@ -1,7 +1,6 @@
 package com.disignstudio.project.loader.data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by ohadbenporat on 2/5/16.
@@ -13,13 +12,15 @@ public class ApartmentTemplateData implements Serializable {
     private String name;
     private String image;
     private int numOfRooms;
+    private String defaultFacebookVideoUrl;
 
-    public ApartmentTemplateData(long id, String code, String name, String image, int numOfRooms) {
+    public ApartmentTemplateData(long id, String code, String name, String image, int numOfRooms, String defaultFacebookVideoUrl) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.image = image;
         this.numOfRooms = numOfRooms;
+        this.defaultFacebookVideoUrl = defaultFacebookVideoUrl;
     }
 
     public long getId() {
@@ -60,5 +61,13 @@ public class ApartmentTemplateData implements Serializable {
 
     public void setNumOfRooms(int numOfRooms) {
         this.numOfRooms = numOfRooms;
+    }
+
+    public String getDefaultFacebookVideoUrl() {
+        return defaultFacebookVideoUrl;
+    }
+
+    public void setDefaultFacebookVideoUrl(String defaultFacebookVideoUrl) {
+        this.defaultFacebookVideoUrl = defaultFacebookVideoUrl;
     }
 }

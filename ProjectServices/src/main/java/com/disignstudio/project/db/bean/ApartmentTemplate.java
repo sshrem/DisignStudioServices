@@ -11,21 +11,23 @@ public class ApartmentTemplate {
     private int numOfRooms;
     private String name;
     private String image;
+    private String defaultFacebookVideoUrl;
 
     public ApartmentTemplate() {
     }
 
-    public ApartmentTemplate(String code, long projectId, String name, String image, int numOfRooms) {
-        this(0L, code, projectId, name, image, numOfRooms);
+    public ApartmentTemplate(String code, long projectId, String name, String image, int numOfRooms, String defaultFacebookVideoUrl) {
+        this(0L, code, projectId, name, image, numOfRooms, defaultFacebookVideoUrl);
     }
 
-    public ApartmentTemplate(long id, String code, long projectId, String name, String image, int numOfRooms) {
+    public ApartmentTemplate(long id, String code, long projectId, String name, String image, int numOfRooms, String defaultFacebookVideoUrl) {
         this.id = id;
         this.code = code;
         this.projectId = projectId;
         this.name = name;
         this.image = image;
         this.numOfRooms = numOfRooms;
+        this.defaultFacebookVideoUrl = defaultFacebookVideoUrl;
     }
 
     public long getId() {
@@ -74,5 +76,13 @@ public class ApartmentTemplate {
 
     public void setNumOfRooms(int numOfRooms) {
         this.numOfRooms = numOfRooms;
+    }
+
+    public String getDefaultFacebookVideoUrl() {
+        return defaultFacebookVideoUrl;
+    }
+
+    public void setDefaultFacebookVideoUrl(String defaultFacebookVideoUrl) {
+        this.defaultFacebookVideoUrl = defaultFacebookVideoUrl;
     }
 }
