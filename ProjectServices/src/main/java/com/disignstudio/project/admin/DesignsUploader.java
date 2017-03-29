@@ -75,7 +75,7 @@ public class DesignsUploader {
             return;
         }
 
-        Design design = new Design(data.getDesignerId(), apartmentTemplateId, data.getDesignName(), data.getDesignImg());
+        Design design = new Design(data.getDesignerId(), apartmentTemplateId, data.getDesignName(), data.getDesignImg(), data.getFacebookVideoUrl());
         this.designId = designDao.saveOrUpdate(design);
     }
 

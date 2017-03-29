@@ -14,14 +14,16 @@ public class DesignData implements Serializable {
     private String title;
     private String imagingCode;
     private List<DesignItemData> designItems;
+    private String facebookVideoUrl;
 
-    public DesignData(long id, String designerName, String designerImage, String title, String imagingCode, List<DesignItemData> designItems) {
+    public DesignData(long id, String designerName, String designerImage, String title, String imagingCode, String facebookVideoUrl, List<DesignItemData> designItems) {
         this.id = id;
         this.designerName = designerName;
         this.designerImage = designerImage;
         this.title = title;
         this.imagingCode = imagingCode;
         this.designItems = designItems;
+        this.facebookVideoUrl = facebookVideoUrl;
     }
 
     public long getId() {
@@ -70,5 +72,26 @@ public class DesignData implements Serializable {
 
     public void setDesignItems(List<DesignItemData> designItems) {
         this.designItems = designItems;
+    }
+
+    public String getFacebookVideoUrl() {
+        return facebookVideoUrl;
+    }
+
+    public void setFacebookVideoUrl(String facebookVideoUrl) {
+        this.facebookVideoUrl = facebookVideoUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "DesignData{" +
+                "id=" + id +
+                ", designerName='" + designerName + '\'' +
+                ", designerImage='" + designerImage + '\'' +
+                ", title='" + title + '\'' +
+                ", imagingCode='" + imagingCode + '\'' +
+                ", designItems=" + designItems +
+                ", facebookVideoUrl='" + facebookVideoUrl + '\'' +
+                '}';
     }
 }

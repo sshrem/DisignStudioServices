@@ -19,7 +19,7 @@ import java.util.Map;
 public class DesignDaoImpl implements IDesignDao {
 
     private static final String TABLE_NAME = "dsds_designs";
-    private static final String UPDATE_DESIGN_QUERY = "update dsds_designs set dsds_designer_id = ?, dsds_apartment_template_id = ?, dsds_imaging_code = ?,dsds_title = ? where dsds_id = ?";
+    private static final String UPDATE_DESIGN_QUERY = "update dsds_designs set dsds_designer_id = ?, dsds_apartment_template_id = ?, dsds_imaging_code = ?,dsds_title = ?, dsds_facebook_video_url = ? where dsds_id = ?";
     private static final String FIND_DESIGN_BY_ID_QUERY = "select * from dsds_designs where dsds_id = %d";
     private static final String FIND_DESIGN_BY_TEMPLATE_ID_QUERY = "select a.*,b.dsde_image,c.dsco_name " +
             "from dsds_designs a join dsde_designers b on dsds_designer_id = dsde_id join dsco_contacts c on dsde_contact_id = dsco_id " +

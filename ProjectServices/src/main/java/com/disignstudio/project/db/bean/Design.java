@@ -10,20 +10,22 @@ public class Design {
     private long apartmentTemplateId;
     private String title;
     private String imagingCode;
+    private String facebookVideoUrl;
 
     public Design() {
     }
 
-    public Design(long designerId, long apartmentTemplateId, String title, String imagingCode) {
-        this(0L, designerId, apartmentTemplateId, title, imagingCode);
+    public Design(long designerId, long apartmentTemplateId, String title, String imagingCode, String facebookVideoUrl) {
+        this(0L, designerId, apartmentTemplateId, title, imagingCode, facebookVideoUrl);
     }
 
-    public Design(long id, long designerId, long apartmentTemplateId, String title, String imagingCode) {
+    public Design(long id, long designerId, long apartmentTemplateId, String title, String imagingCode, String facebookVideoUrl) {
         this.id = id;
         this.designerId = designerId;
         this.apartmentTemplateId = apartmentTemplateId;
         this.title = title;
         this.imagingCode = imagingCode;
+        this.facebookVideoUrl = facebookVideoUrl;
     }
 
     public long getId() {
@@ -64,5 +66,25 @@ public class Design {
 
     public void setApartmentTemplateId(long apartmentTemplateId) {
         this.apartmentTemplateId = apartmentTemplateId;
+    }
+
+    public String getFacebookVideoUrl() {
+        return facebookVideoUrl;
+    }
+
+    public void setFacebookVideoUrl(String facebookVideoUrl) {
+        this.facebookVideoUrl = facebookVideoUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Design{" +
+                "id=" + id +
+                ", designerId=" + designerId +
+                ", apartmentTemplateId=" + apartmentTemplateId +
+                ", title='" + title + '\'' +
+                ", imagingCode='" + imagingCode + '\'' +
+                ", facebookVideoUrl='" + facebookVideoUrl + '\'' +
+                '}';
     }
 }

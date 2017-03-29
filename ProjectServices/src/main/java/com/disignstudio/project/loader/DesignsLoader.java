@@ -51,7 +51,7 @@ public class DesignsLoader {
         designs.forEach(design -> {
             List<DesignItemData> designItems = loadDesignItems(design.getId());
             designsData.add(new DesignData(design.getId(), design.getDesignerName(), design.getDesignerImage(), design.getTitle(),
-                    design.getImagingCode(), designItems));
+                    design.getImagingCode(), design.getFacebookVideoUrl() , designItems));
         });
 
         return designsData;

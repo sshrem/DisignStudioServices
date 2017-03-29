@@ -12,14 +12,16 @@ public class DesignCachedData {
     private String designerName;
     private String designerLogo;
     private String imagingCode;
+    private String facebookVideoUrl;
     private List<DesignItemCachedData> items;
 
-    public DesignCachedData(long id, String title, String designerName, String designerLogo, String imagingCode, List<DesignItemCachedData> items) {
+    public DesignCachedData(long id, String title, String designerName, String designerLogo, String imagingCode, String facebookVideoUrl, List<DesignItemCachedData> items) {
         this.id = id;
         this.title = title;
         this.designerName = designerName;
         this.designerLogo = designerLogo;
         this.imagingCode = imagingCode;
+        this.facebookVideoUrl = facebookVideoUrl;
         this.items = items;
     }
 
@@ -69,5 +71,13 @@ public class DesignCachedData {
 
     public void setItems(List<DesignItemCachedData> items) {
         this.items = items;
+    }
+
+    public String getFacebookVideoUrl() {
+        return facebookVideoUrl;
+    }
+
+    public void setFacebookVideoUrl(String facebookVideoUrl) {
+        this.facebookVideoUrl = facebookVideoUrl;
     }
 }

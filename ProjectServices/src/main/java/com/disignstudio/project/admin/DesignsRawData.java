@@ -14,6 +14,7 @@ public class DesignsRawData {
     private Long designerId;
     private Integer room;
     private String designImg;
+    private String facebookVideoUrl;
 
     public DesignsRawData(String line) {
 
@@ -25,6 +26,7 @@ public class DesignsRawData {
         this.designImg = fields[4];
         this.offeringId = convertInt(fields[5]);
         this.room = convertInt(fields[6]);
+        this.facebookVideoUrl = fields[7];
     }
 
     private Integer convertInt(String field) {
@@ -97,5 +99,13 @@ public class DesignsRawData {
 
     public void setDesignImg(String designImg) {
         this.designImg = designImg;
+    }
+
+    public String getFacebookVideoUrl() {
+        return facebookVideoUrl;
+    }
+
+    public void setFacebookVideoUrl(String facebookVideoUrl) {
+        this.facebookVideoUrl = facebookVideoUrl;
     }
 }

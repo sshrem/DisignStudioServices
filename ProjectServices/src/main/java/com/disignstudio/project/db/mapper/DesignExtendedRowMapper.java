@@ -14,6 +14,7 @@ public class DesignExtendedRowMapper implements RowMapper<DesignExtended> {
     public DesignExtended mapRow(ResultSet rs, int i) throws SQLException {
         return new DesignExtended(rs.getLong("dsds_id"), rs.getLong("dsds_designer_id"),
                 rs.getLong("dsds_apartment_template_id"), rs.getString("dsds_title"), rs.getString("dsds_imaging_code"),
+                rs.getString("dsds_facebook_video_url"),
                 rs.getString("dsco_name"), rs.getString("dsde_image"));
     }
 }

@@ -7,17 +7,19 @@ import com.disignstudio.project.cache.pojo.DesignCachedData;
 import com.disignstudio.project.cache.pojo.DesignItemCachedData;
 import com.disignstudio.project.cache.pojo.DesignsCachedData;
 import com.disignstudio.project.loader.DesignsLoader;
+import com.disignstudio.project.loader.data.DesignData;
 import com.disignstudio.project.loader.data.DesignDataWrapper;
 import com.disignstudio.project.loader.data.DesignItemData;
-import com.disignstudio.project.redirect.RedirectUrlBuilder;
-import com.disignstudio.project.stats.EViewImagingSource;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by ohadbenporat on 3/22/16.
@@ -41,18 +43,22 @@ public class DesignsCacheLoader implements ICacheLoader {
 
         DesignDataWrapper designsData = loader.load((Long) key);
 
-        List<DesignCachedData> designs = Lists.newArrayList();
-        designsData.getDesigns().forEach(design -> {
+        List<DesignCachedData> designs = designsData.getDesigns()
+                .stream()
+                .map(mapToDesignCachedData())
+                .collect(Collectors.toCollection(ArrayList::new));
 
-
-            String designerLogo = cloudinaryUtils.buildDesignerImagesPath(design.getDesignerImage());
-
-
-            List<DesignItemCachedData> designItems = buildDesignItems(design.getDesignItems());
-            designs.add(new DesignCachedData(design.getId(), design.getTitle(), design.getDesignerName(), designerLogo, design.getImagingCode(), designItems));
-        });
 
         return new DesignsCachedData(designs);
+    }
+
+    private Function<DesignData, DesignCachedData> mapToDesignCachedData() {
+        return design -> {
+            String designerLogo = cloudinaryUtils.buildDesignerImagesPath(design.getDesignerImage());
+
+            List<DesignItemCachedData> designItems = buildDesignItems(design.getDesignItems());
+             return new DesignCachedData(design.getId(), design.getTitle(), design.getDesignerName(), designerLogo, design.getImagingCode(), design.getFacebookVideoUrl(), designItems);
+        };
     }
 
     private List<DesignItemCachedData> buildDesignItems(List<DesignItemData> designItems) {
