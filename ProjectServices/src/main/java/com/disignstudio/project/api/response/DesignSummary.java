@@ -13,14 +13,16 @@ public class DesignSummary implements Serializable {
     private String designerName;
     private String designerImage;
     private String redirectUrl;
+    private String facebookVideoUrl;
 
-    public DesignSummary(long id, String title, String designerName, String designerImage, String imaging, String redirectUrl) {
+    public DesignSummary(long id, String title, String designerName, String designerImage, String imaging, String redirectUrl, String facebookVideoUrl) {
         this.id = id;
         this.title = title;
         this.designerName = designerName;
         this.designerImage = designerImage;
         this.imaging = imaging;
         this.redirectUrl = redirectUrl;
+        this.facebookVideoUrl = facebookVideoUrl;
     }
 
     public long getId() {
@@ -69,5 +71,13 @@ public class DesignSummary implements Serializable {
 
     public void setRedirectUrl(String redirectUrl) {
         this.redirectUrl = redirectUrl;
+    }
+
+    public String getFacebookVideoUrl() {
+        return facebookVideoUrl;
+    }
+
+    public void setFacebookVideoUrl(String facebookVideoUrl) {
+        this.facebookVideoUrl = facebookVideoUrl;
     }
 }

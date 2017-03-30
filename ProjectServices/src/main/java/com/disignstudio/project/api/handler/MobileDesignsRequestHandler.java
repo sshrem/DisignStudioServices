@@ -58,7 +58,7 @@ public class MobileDesignsRequestHandler {
             String designImaging = cloudinaryUtils.buildApartmentTemplateImagesPath(projectData.getCode(), apartmentTemplateCachedData.getCode(), design.getImagingCode());
             String redirectUrl = redirectUrlBuilder.build(request.getProjId(), request.getAtId(), design.getId(), EViewImagingSource.SOCIAL);
             DesignSummary ds = new DesignSummary(design.getId(), design.getTitle(), design.getDesignerName(), design.getDesignerLogo(),
-                    designImaging, redirectUrl);
+                    designImaging, redirectUrl, design.getFacebookVideoUrl());
             designSummaries.add(ds);
         });
 
