@@ -12,13 +12,15 @@ public class ApartmentTemplateCachedData implements Serializable {
     private String image;
     private String code;
     private int numOfRooms;
+    private String defaultFacebookVideoUrl;
 
-    public ApartmentTemplateCachedData(long id, String name, String image, String code, int numOfRooms) {
+    public ApartmentTemplateCachedData(long id, String name, String image, String code, int numOfRooms, String defaultFacebookVideoUrl) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.code = code;
         this.numOfRooms = numOfRooms;
+        this.defaultFacebookVideoUrl = defaultFacebookVideoUrl;
     }
 
     public long getId() {
@@ -59,6 +61,14 @@ public class ApartmentTemplateCachedData implements Serializable {
 
     public void setNumOfRooms(int numOfRooms) {
         this.numOfRooms = numOfRooms;
+    }
+
+    public String getDefaultFacebookVideoUrl() {
+        return defaultFacebookVideoUrl;
+    }
+
+    public void setDefaultFacebookVideoUrl(String defaultFacebookVideoUrl) {
+        this.defaultFacebookVideoUrl = defaultFacebookVideoUrl;
     }
 }
 

@@ -56,7 +56,7 @@ public class ProjectCacheLoader implements ICacheLoader {
         List<ApartmentTemplateCachedData> cachedData = Lists.newArrayList();
         apartmentTemplates.forEach(aptTmpl -> {
             String image = cloudinaryUtils.buildApartmentTemplateImagesPath(projectCode, aptTmpl.getCode(), aptTmpl.getImage());
-            cachedData.add(new ApartmentTemplateCachedData(aptTmpl.getId(), aptTmpl.getName(), image, aptTmpl.getCode(), aptTmpl.getNumOfRooms()));
+            cachedData.add(new ApartmentTemplateCachedData(aptTmpl.getId(), aptTmpl.getName(), image, aptTmpl.getCode(), aptTmpl.getNumOfRooms(), aptTmpl.getDefaultFacebookVideoUrl()));
         });
 
         return cachedData;

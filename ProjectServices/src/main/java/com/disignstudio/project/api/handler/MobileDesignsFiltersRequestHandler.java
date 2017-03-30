@@ -51,7 +51,7 @@ public class MobileDesignsFiltersRequestHandler {
         Pair<List<SupplierSummary>, List<RoomItemSummary>> designsData = extractDataFromDesigns(allDesignsData.getDesigns());
 
         return new MobileDesignFiltersResponse(apartmentTemplateCachedData.getName(), designsData.getLeft(),
-            designsData.getRight(), videosDetails);
+            designsData.getRight(), videosDetails, apartmentTemplateCachedData.getDefaultFacebookVideoUrl());
     }
 
     private Pair<List<SupplierSummary>, List<RoomItemSummary>> extractDataFromDesigns(List<DesignCachedData> designs) {
