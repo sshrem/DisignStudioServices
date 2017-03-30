@@ -11,7 +11,7 @@ public class DesignExtended extends Design {
     private String designerImage;
 
     public DesignExtended(long id, long designerId, long apartmentTemplateId, String title, String imagingCode,
-                          String designerName, String designerImage, String facebookVideoUrl) {
+                          String facebookVideoUrl, String designerName, String designerImage) {
 
         super(id, designerId, apartmentTemplateId, title, imagingCode, facebookVideoUrl);
         this.designerName = designerName;
