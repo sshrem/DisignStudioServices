@@ -12,13 +12,13 @@ public class MobileDesignFiltersResponse {
     private String title;
     private List<SupplierSummary> suppliers;
     private List<RoomItemSummary> roomItems;
-    private List<VideoDetailsData> videosDetails;
+    private List<VideoDetailsSummary> videosDetails;
     private String defaultFacebookVideoUrl;
 
     public MobileDesignFiltersResponse() {
     }
 
-    public MobileDesignFiltersResponse(String title, List<SupplierSummary> suppliers, List<RoomItemSummary> roomItems, List<VideoDetailsData> videosDetails, String defaultFacebookVideoUrl) {
+    public MobileDesignFiltersResponse(String title, List<SupplierSummary> suppliers, List<RoomItemSummary> roomItems, List<VideoDetailsSummary> videosDetails, String defaultFacebookVideoUrl) {
         this.title = title;
         this.suppliers = suppliers;
         this.roomItems = roomItems;
@@ -50,11 +50,11 @@ public class MobileDesignFiltersResponse {
         this.roomItems = roomItems;
     }
 
-    public List<VideoDetailsData> getVideosDetails() {
+    public List<VideoDetailsSummary> getVideosDetails() {
         return videosDetails;
     }
 
-    public void setVideosDetails(List<VideoDetailsData> videosDetails) {
+    public void setVideosDetails(List<VideoDetailsSummary> videosDetails) {
         this.videosDetails = videosDetails;
     }
 

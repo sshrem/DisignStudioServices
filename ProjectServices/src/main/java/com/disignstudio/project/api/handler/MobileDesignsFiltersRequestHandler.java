@@ -2,14 +2,13 @@ package com.disignstudio.project.api.handler;
 
 import com.disignstudio.common.cache.ICacheClient;
 import com.disignstudio.project.api.request.DesignsFiltersRequest;
-import com.disignstudio.project.api.response.DesignItemSummary;
-import com.disignstudio.project.api.response.MobileDesignFiltersResponse;
-import com.disignstudio.project.api.response.RoomItemSummary;
-import com.disignstudio.project.api.response.SupplierSummary;
+import com.disignstudio.project.api.response.*;
 import com.disignstudio.project.cache.DesignsCacheLoader;
 import com.disignstudio.project.cache.ProjectCacheLoader;
 import com.disignstudio.project.cache.pojo.*;
+import com.disignstudio.project.db.bean.VideoDetails;
 import com.disignstudio.project.db.bean.helper.EDesignFilter;
+import com.disignstudio.project.db.bean.helper.ERoom;
 import com.disignstudio.project.loader.data.VideoDetailsData;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -41,17 +40,37 @@ public class MobileDesignsFiltersRequestHandler {
     }
 
     public MobileDesignFiltersResponse execute(DesignsFiltersRequest request) {
-
-
         ProjectCachedData projectData = cacheClient.getOrLoad(request.getProjId(), projectCacheLoader, request.isUseCache());
         ApartmentTemplateCachedData apartmentTemplateCachedData = loadApartmentTemplate(projectData.getApartmentTemplateCachedData(), request.getAtId());
-        List<VideoDetailsData> videosDetails = loadVideoDetails(projectData.getVideoDetails(), request.getAtId()) ;
+        List<VideoDetailsSummary> videosDetails = extractVideoDetails(projectData.getVideoDetails(), request.getAtId()) ;
 
         DesignsCachedData allDesignsData = cacheClient.getOrLoad(request.getAtId(), designsCacheLoader, request.isUseCache());
         Pair<List<SupplierSummary>, List<RoomItemSummary>> designsData = extractDataFromDesigns(allDesignsData.getDesigns());
 
         return new MobileDesignFiltersResponse(apartmentTemplateCachedData.getName(), designsData.getLeft(),
             designsData.getRight(), videosDetails, apartmentTemplateCachedData.getDefaultFacebookVideoUrl());
+    }
+
+    private List<VideoDetailsSummary> extractVideoDetails(List<VideoDetailsData> videosDetails, long apartmentTemplateId){
+        Map<Long, VideoDetailsData> filteredVideoByRoomId = videosDetails.stream()
+                .filter(v -> v.getApartmentTemplateId() == apartmentTemplateId).collect(Collectors.toMap(VideoDetailsData::getRoomId, x->x));
+        List<VideoDetailsSummary> videoDetailsSummary = Lists.newArrayList();
+
+        List<ERoom> videoOrder = Lists.newArrayList(ERoom.LIVINGROOM, ERoom.BEDROOM, ERoom.BATHROOM);
+
+        long startTime = 0;
+        long endTime = 0;
+        int videoOrdinal = 0;
+        for (ERoom eRoom : videoOrder) {
+            int roomId = eRoom.getId();
+            VideoDetailsData v = filteredVideoByRoomId.get((long) roomId);
+            endTime = startTime + v.getVideoLength();
+            VideoDetailsSummary summary = new VideoDetailsSummary(v.getRoomId(), v.getVideoLength(), startTime, endTime, videoOrdinal);
+            videoDetailsSummary.add(summary);
+            startTime = endTime;
+            videoOrdinal++;
+        }
+        return videoDetailsSummary;
     }
 
     private Pair<List<SupplierSummary>, List<RoomItemSummary>> extractDataFromDesigns(List<DesignCachedData> designs) {
@@ -88,7 +107,7 @@ public class MobileDesignsFiltersRequestHandler {
                     continue;
                 }
 
-                mapSupplierIdToSummary.put(item.getSupplierId(), new SupplierSummary(item.getSupplierId(), item.getSupplierLogo()));
+                mapSupplierIdToSummary.put(item.getSupplierId(), new SupplierSummary(item.getSupplierId(), item.getSupplierName() , item.getSupplierLogo(), item.getSupplierUrl()));
             }
             ;
         });
@@ -124,11 +143,4 @@ public class MobileDesignsFiltersRequestHandler {
 
         return null;
     }
-
-    private List<VideoDetailsData> loadVideoDetails(List<VideoDetailsData> videosDetails, long apartmentTemplateId) {
-        return videosDetails.stream()
-            .filter(v -> v.getApartmentTemplateId() == apartmentTemplateId).collect(Collectors.toList());
-    }
-
-
 }
