@@ -5,14 +5,10 @@ package com.disignstudio.project.api.request;
  */
 public class FacebookShareRequest {
     private String userId;
-    private String uuid;
     private Long projectId;
     private Long apartmentTemplateId;
     private Integer roomId;
     private Long designId;
-    private String deviceModel;
-    private String os;
-    private String osVersion;
 
     public FacebookShareRequest() {
     }
@@ -23,14 +19,6 @@ public class FacebookShareRequest {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public Long getProjectId() {
@@ -63,29 +51,5 @@ public class FacebookShareRequest {
 
     public void setDesignId(Long designId) {
         this.designId = designId;
-    }
-
-    public String getDeviceModel() {
-        return deviceModel;
-    }
-
-    public void setDeviceModel(String deviceModel) {
-        this.deviceModel = deviceModel;
-    }
-
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
-    }
-
-    public String getOsVersion() {
-        return osVersion;
-    }
-
-    public void setOsVersion(String osVersion) {
-        this.osVersion = osVersion;
     }
 }

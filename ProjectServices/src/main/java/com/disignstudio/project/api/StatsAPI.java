@@ -65,7 +65,7 @@ public class StatsAPI {
     @Timed(name = "statsVideoViewRequests", absolute = true)
     public Response recordVideoView(VideoViewRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordVideoView(reqData, request.getRemoteAddr());
+        statsHandler.recordVideoView(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
         return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
     }
 
@@ -74,7 +74,7 @@ public class StatsAPI {
     @Timed(name = "statsFacebookShareRequests", absolute = true)
     public Response recordFacebookShare(FacebookShareRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordFacebookShare(reqData, request.getRemoteAddr());
+        statsHandler.recordFacebookShare(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
         return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
     }
 

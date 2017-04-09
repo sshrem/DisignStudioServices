@@ -115,16 +115,16 @@ public class ProjectStatsHandler {
         return null;
     }
 
-    public void recordVideoView(VideoViewRequest req, String remoteAddr) {
+    public void recordVideoView(VideoViewRequest req, String remoteAddr, String userAgent) {
         executorService.submit((Callable<Void>) () -> {
             try {
                 ProjectCachedData projectData = loadProjectData(req.getProjectId());
                 ApartmentTemplateCachedData aptTmpl = findApartmentTemplateData(projectData.getApartmentTemplateCachedData(), req.getApartmentTemplateId());
                 int numOfRooms = aptTmpl != null ? aptTmpl.getNumOfRooms() : 0;
 
-                videoViewDao.insert(new VideoView(System.currentTimeMillis(), req.getUserId(), req.getUuid(), projectData.getEntrepreneurCachedData().getId(),
+                videoViewDao.insert(new VideoView(System.currentTimeMillis(), req.getUserId(), projectData.getEntrepreneurCachedData().getId(),
                         req.getProjectId(), projectData.getCountryId(), projectData.getCityId(), req.getApartmentTemplateId(), req.getRoomId(), numOfRooms, remoteAddr,
-                        req.getDesignId(), req.getOs(), req.getDeviceModel(), req.getOsVersion()));
+                        req.getDesignId(), userAgent));
             } catch (Exception e) {
                 logger.error("Failed to register user action", e);
             }
@@ -134,16 +134,16 @@ public class ProjectStatsHandler {
 
     }
 
-    public void recordFacebookShare(FacebookShareRequest req, String remoteAddr) {
+    public void recordFacebookShare(FacebookShareRequest req, String remoteAddr, String userAgent) {
         executorService.submit((Callable<Void>) () -> {
             try {
                 ProjectCachedData projectData = loadProjectData(req.getProjectId());
                 ApartmentTemplateCachedData aptTmpl = findApartmentTemplateData(projectData.getApartmentTemplateCachedData(), req.getApartmentTemplateId());
                 int numOfRooms = aptTmpl != null ? aptTmpl.getNumOfRooms() : 0;
 
-                facebookShareDao.insert(new FacebookShare(System.currentTimeMillis(), req.getUserId(), req.getUuid(), projectData.getEntrepreneurCachedData().getId(),
+                facebookShareDao.insert(new FacebookShare(System.currentTimeMillis(), req.getUserId(), projectData.getEntrepreneurCachedData().getId(),
                         req.getProjectId(), projectData.getCountryId(), projectData.getCityId(), req.getApartmentTemplateId(), req.getRoomId(), numOfRooms, remoteAddr,
-                        req.getDesignId(), req.getOs(), req.getDeviceModel(), req.getOsVersion()));
+                        req.getDesignId(), userAgent));
             } catch (Exception e) {
                 logger.error("Failed to register user action", e);
             }
