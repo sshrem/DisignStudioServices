@@ -12,6 +12,7 @@ public class FacebookShare {
     private String id;
     private long timestamp;
     private String userId;
+    private String entrepreneurUserId;
     private Long entrepreneurId;
     private Long projectId;
     private Integer countryId;
@@ -23,9 +24,10 @@ public class FacebookShare {
     private Long designId;
     private String userAgent;
 
-    public FacebookShare(long timestamp, String userId, Long entrepreneurId, Long projectId, Integer countryId, Integer cityId, Long apartmentTemplateId, Integer roomId, Integer numOfRooms, String ipAddress, Long designId, String userAgent) {
+    public FacebookShare(long timestamp, String userId, String entrepreneurUserId, Long entrepreneurId, Long projectId, Integer countryId, Integer cityId, Long apartmentTemplateId, Integer roomId, Integer numOfRooms, String ipAddress, Long designId, String userAgent) {
         this.timestamp = timestamp;
         this.userId = userId;
+        this.entrepreneurUserId = entrepreneurUserId;
         this.entrepreneurId = entrepreneurId;
         this.projectId = projectId;
         this.countryId = countryId;
@@ -36,6 +38,14 @@ public class FacebookShare {
         this.ipAddress = ipAddress;
         this.designId = designId;
         this.userAgent = userAgent;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public long getTimestamp() {
@@ -52,6 +62,14 @@ public class FacebookShare {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getEntrepreneurUserId() {
+        return entrepreneurUserId;
+    }
+
+    public void setEntrepreneurUserId(String entrepreneurUserId) {
+        this.entrepreneurUserId = entrepreneurUserId;
     }
 
     public Long getEntrepreneurId() {

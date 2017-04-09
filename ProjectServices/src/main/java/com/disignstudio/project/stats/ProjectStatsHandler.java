@@ -122,7 +122,7 @@ public class ProjectStatsHandler {
                 ApartmentTemplateCachedData aptTmpl = findApartmentTemplateData(projectData.getApartmentTemplateCachedData(), req.getApartmentTemplateId());
                 int numOfRooms = aptTmpl != null ? aptTmpl.getNumOfRooms() : 0;
 
-                videoViewDao.insert(new VideoView(System.currentTimeMillis(), req.getUserId(), projectData.getEntrepreneurCachedData().getId(),
+                videoViewDao.insert(new VideoView(System.currentTimeMillis(), req.getUserId(), req.getEntrepreneurUserId(), projectData.getEntrepreneurCachedData().getId(),
                         req.getProjectId(), projectData.getCountryId(), projectData.getCityId(), req.getApartmentTemplateId(), req.getRoomId(), numOfRooms, remoteAddr,
                         req.getDesignId(), userAgent));
             } catch (Exception e) {
@@ -141,7 +141,7 @@ public class ProjectStatsHandler {
                 ApartmentTemplateCachedData aptTmpl = findApartmentTemplateData(projectData.getApartmentTemplateCachedData(), req.getApartmentTemplateId());
                 int numOfRooms = aptTmpl != null ? aptTmpl.getNumOfRooms() : 0;
 
-                facebookShareDao.insert(new FacebookShare(System.currentTimeMillis(), req.getUserId(), projectData.getEntrepreneurCachedData().getId(),
+                facebookShareDao.insert(new FacebookShare(System.currentTimeMillis(), req.getUserId(), req.getEntrepreneurUserId(), projectData.getEntrepreneurCachedData().getId(),
                         req.getProjectId(), projectData.getCountryId(), projectData.getCityId(), req.getApartmentTemplateId(), req.getRoomId(), numOfRooms, remoteAddr,
                         req.getDesignId(), userAgent));
             } catch (Exception e) {

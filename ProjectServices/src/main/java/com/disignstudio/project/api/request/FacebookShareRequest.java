@@ -5,6 +5,7 @@ package com.disignstudio.project.api.request;
  */
 public class FacebookShareRequest {
     private String userId;
+    private String entrepreneurUserId;
     private Long projectId;
     private Long apartmentTemplateId;
     private Integer roomId;
@@ -15,6 +16,14 @@ public class FacebookShareRequest {
 
     public String getUserId() {
         return userId;
+    }
+
+    public String getEntrepreneurUserId() {
+        return entrepreneurUserId;
+    }
+
+    public void setEntrepreneurUserId(String entrepreneurUserId) {
+        this.entrepreneurUserId = entrepreneurUserId;
     }
 
     public void setUserId(String userId) {

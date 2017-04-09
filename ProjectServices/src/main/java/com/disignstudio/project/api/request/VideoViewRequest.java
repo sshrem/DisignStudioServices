@@ -5,6 +5,7 @@ package com.disignstudio.project.api.request;
  */
 public class VideoViewRequest {
     private String userId;
+    private String entrepreneurUserId;
     private Long projectId;
     private Long apartmentTemplateId;
     private Integer roomId;
@@ -19,6 +20,14 @@ public class VideoViewRequest {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getEntrepreneurUserId() {
+        return entrepreneurUserId;
+    }
+
+    public void setEntrepreneurUserId(String entrepreneurUserId) {
+        this.entrepreneurUserId = entrepreneurUserId;
     }
 
     public Long getProjectId() {
