@@ -1,9 +1,7 @@
 package com.disignstudio.project.api;
 
 import com.codahale.metrics.annotation.Timed;
-import com.disignstudio.project.api.request.ImagingViewRequest;
-import com.disignstudio.project.api.request.UserActionRequest;
-import com.disignstudio.project.api.request.ViewSupplierRequest;
+import com.disignstudio.project.api.request.*;
 import com.disignstudio.project.stats.ProjectStatsHandler;
 import com.disignstudio.web.response.DesignStudioResponse;
 import com.disignstudio.web.response.DesignStudioResponseBuilder;
@@ -61,4 +59,24 @@ public class StatsAPI {
         statsHandler.recordViewSupplier(reqData, request.getRemoteAddr());
         return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
     }
+
+    @POST
+    @Path("/recordVideoView")
+    @Timed(name = "statsVideoViewRequests", absolute = true)
+    public Response recordVideoView(VideoViewRequest reqData, @Context HttpServletRequest request) {
+
+        statsHandler.recordVideoView(reqData, request.getRemoteAddr());
+        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+    }
+
+    @POST
+    @Path("/recordFacebookShare")
+    @Timed(name = "statsFacebookShareRequests", absolute = true)
+    public Response recordFacebookShare(FacebookShareRequest reqData, @Context HttpServletRequest request) {
+
+        statsHandler.recordFacebookShare(reqData, request.getRemoteAddr());
+        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+    }
+
+
 }

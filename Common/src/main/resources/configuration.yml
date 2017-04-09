@@ -31,6 +31,6 @@ DisignStudio:
     mysql.rw.url: jdbc:mysql://tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z9jz5yqxxbm2m74w
     mysql.rw.username: oimfbzmy3qkwc8hg
     mysql.rw.password: oenvaidx9zihhqmu
-    mongodb.stats.uri: mongodb://disignstudio:d1s1gnstud10@ds015770.mlab.com:15770/heroku_gq749psx
+    mongodb.stats.uri: mongodb://disignstudio:DfrAaeiUNtDdEcQg4MRKW7@ds015770.mlab.com:15770/heroku_gq749psx
     redirect.base.url: http://projects.disignstudio.com/api/redirect/imaging?pId=%d&atId=%d&dId=%d&src=%s
 

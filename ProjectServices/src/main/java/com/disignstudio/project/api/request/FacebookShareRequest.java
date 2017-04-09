@@ -1,10 +1,9 @@
 package com.disignstudio.project.api.request;
 
 /**
- * Created by ohadbenporat on 3/31/16.
+ * Created by shrem on 4/9/17.
  */
-public class UserActionRequest {
-
+public class FacebookShareRequest {
     private String userId;
     private String uuid;
     private Long projectId;
@@ -14,9 +13,8 @@ public class UserActionRequest {
     private String deviceModel;
     private String os;
     private String osVersion;
-    private int action;
 
-    public UserActionRequest() {
+    public FacebookShareRequest() {
     }
 
     public String getUserId() {
@@ -67,28 +65,20 @@ public class UserActionRequest {
         this.designId = designId;
     }
 
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
-    }
-
-    public int getAction() {
-        return action;
-    }
-
-    public void setAction(int action) {
-        this.action = action;
-    }
-
     public String getDeviceModel() {
         return deviceModel;
     }
 
     public void setDeviceModel(String deviceModel) {
         this.deviceModel = deviceModel;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public void setOs(String os) {
+        this.os = os;
     }
 
     public String getOsVersion() {

@@ -4,14 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Created by ohadbenporat on 3/31/16.
+ * Created by shrem on 4/9/17.
  */
-@Document(collection = "user_actions")
-public class UserAction {
-
+@Document(collection = "video_view")
+public class VideoView {
     @Id
     private String id;
-    private final long timestamp;
+    private long timestamp;
     private String userId;
     private String uuid;
     private Long entrepreneurId;
@@ -26,10 +25,8 @@ public class UserAction {
     private String os;
     private String deviceModel;
     private String osVersion;
-    private int action;
 
-    public UserAction(long timestamp, String userId, String uuid, Long entrepreneurId, Long projectId, Integer countryId, Integer cityId,
-                      Long apartmentTemplateId, Integer roomId, Integer numOfRooms, String ipAddress, Long designId, String os, String deviceModel, String osVersion, int action) {
+    public VideoView(long timestamp, String userId, String uuid, Long entrepreneurId, Long projectId, Integer countryId, Integer cityId, Long apartmentTemplateId, Integer roomId, Integer numOfRooms, String ipAddress, Long designId, String os, String deviceModel, String osVersion) {
         this.timestamp = timestamp;
         this.userId = userId;
         this.uuid = uuid;
@@ -45,7 +42,6 @@ public class UserAction {
         this.os = os;
         this.deviceModel = deviceModel;
         this.osVersion = osVersion;
-        this.action = action;
     }
 
     public String getId() {
@@ -58,6 +54,10 @@ public class UserAction {
 
     public long getTimestamp() {
         return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getUserId() {
@@ -170,13 +170,5 @@ public class UserAction {
 
     public void setOsVersion(String osVersion) {
         this.osVersion = osVersion;
-    }
-
-    public int getAction() {
-        return action;
-    }
-
-    public void setAction(int action) {
-        this.action = action;
     }
 }
