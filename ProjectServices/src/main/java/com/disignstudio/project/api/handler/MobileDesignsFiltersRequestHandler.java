@@ -59,12 +59,12 @@ public class MobileDesignsFiltersRequestHandler {
         List<ERoom> videoOrder = Lists.newArrayList(ERoom.LIVINGROOM, ERoom.BEDROOM, ERoom.BATHROOM);
 
         long startTime = 0;
-        long endTime = 0;
+        long endTime = -1;
         int videoOrdinal = 0;
         for (ERoom eRoom : videoOrder) {
             int roomId = eRoom.getId();
             VideoDetailsData v = filteredVideoByRoomId.get((long) roomId);
-            endTime = startTime + v.getVideoLength();
+            endTime = Math.max(startTime + v.getVideoLength(), 0);
             VideoDetailsSummary summary = new VideoDetailsSummary(v.getRoomId(), v.getVideoLength(), startTime, endTime, videoOrdinal);
             videoDetailsSummary.add(summary);
             startTime = endTime;
