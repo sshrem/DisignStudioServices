@@ -52,8 +52,12 @@ public class ProjectsAPI {
     @Timed(name = "webProjectRequests", absolute = true)
     public Response getProject(@QueryParam("code") Long projectCode) {
 
-        ProjectCachedData projectData = cacheClient.getOrLoad(projectCode, projectCacheLoader, true);
-        return responseBuilder.build(projectData);
+        try {
+            ProjectCachedData projectData = cacheClient.getOrLoad(projectCode, projectCacheLoader, true);
+            return responseBuilder.build(projectData);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
     }
 
     @POST
@@ -64,7 +68,7 @@ public class ProjectsAPI {
             MobileDesignsResponse data = designsResponseBuilder.build(request);
             return responseBuilder.build(data);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 
@@ -77,7 +81,7 @@ public class ProjectsAPI {
             MobileDesignFiltersResponse responseData = designsFiltersRequestHandler.execute(request);
             return responseBuilder.build(responseData);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 

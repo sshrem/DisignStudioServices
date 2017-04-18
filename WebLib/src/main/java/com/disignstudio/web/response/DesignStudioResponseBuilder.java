@@ -10,4 +10,9 @@ public class DesignStudioResponseBuilder {
     public <T> Response build(T data) {
         return Response.ok(new DesignStudioResponse(data)).header("Access-Control-Allow-Origin", "*").build();
     }
+
+    public Response error() {
+        return Response.serverError().header("Access-Control-Allow-Origin", "*").build();
+    }
+
 }

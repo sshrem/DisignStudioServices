@@ -49,7 +49,7 @@ public class AdminAPI {
             designsUploader.upload();
             return responseBuilder.build(null);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 
@@ -61,7 +61,7 @@ public class AdminAPI {
             offeringsUploader.upload();
             return responseBuilder.build(null);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 }

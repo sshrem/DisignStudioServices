@@ -58,7 +58,7 @@ public class MobileContentAPI {
             MobileProjectResponse data = projectResponseBuilder.build(request);
             return responseBuilder.build(data);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 
@@ -70,7 +70,7 @@ public class MobileContentAPI {
             MobileDesignsResponse data = designsResponseBuilder.build(request);
             return responseBuilder.build(data);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 
@@ -97,7 +97,7 @@ public class MobileContentAPI {
             MobileDesignFiltersResponse responseData = designsFiltersRequestHandler.execute(request);
             return responseBuilder.build(responseData);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 
@@ -110,7 +110,7 @@ public class MobileContentAPI {
             MobileDesignSuppliersResponse responseData = designSuppliersResponseBuilder.build(request);
             return responseBuilder.build(responseData);
         } catch (Exception e) {
-            throw new InvalidRequestException(e.getMessage(), e);
+            return responseBuilder.error();
         }
     }
 }

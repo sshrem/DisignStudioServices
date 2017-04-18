@@ -38,8 +38,12 @@ public class StatsAPI {
     @Timed(name = "statsImageingViewRequests", absolute = true)
     public Response recordImagingView(ImagingViewRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordImagingView(reqData, request.getRemoteAddr());
-        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        try {
+            statsHandler.recordImagingView(reqData, request.getRemoteAddr());
+            return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
     }
 
     @POST
@@ -47,8 +51,12 @@ public class StatsAPI {
     @Timed(name = "statsUserActionRequests", absolute = true)
     public Response recordUserAction(UserActionRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordUserAction(reqData, request.getRemoteAddr());
-        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        try {
+            statsHandler.recordUserAction(reqData, request.getRemoteAddr());
+            return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
     }
 
     @POST
@@ -56,8 +64,12 @@ public class StatsAPI {
     @Timed(name = "statsUserActionRequests", absolute = true)
     public Response recordViewSupplier(ViewSupplierRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordViewSupplier(reqData, request.getRemoteAddr());
-        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        try {
+            statsHandler.recordViewSupplier(reqData, request.getRemoteAddr());
+            return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
     }
 
     @POST
@@ -65,8 +77,12 @@ public class StatsAPI {
     @Timed(name = "statsVideoViewRequests", absolute = true)
     public Response recordVideoView(VideoViewRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordVideoView(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
-        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        try {
+            statsHandler.recordVideoView(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
+            return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
     }
 
     @POST
@@ -74,8 +90,12 @@ public class StatsAPI {
     @Timed(name = "statsFacebookShareRequests", absolute = true)
     public Response recordFacebookShare(FacebookShareRequest reqData, @Context HttpServletRequest request) {
 
-        statsHandler.recordFacebookShare(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
-        return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        try {
+            statsHandler.recordFacebookShare(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
+            return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
     }
 
 
