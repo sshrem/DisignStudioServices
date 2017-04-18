@@ -98,5 +98,18 @@ public class StatsAPI {
         }
     }
 
+    @POST
+    @Path("/recordVisit")
+    @Timed(name = "statsVisitRequests", absolute = true)
+    public Response recordVisit(VisitRequest reqData, @Context HttpServletRequest request) {
+
+        try {
+            statsHandler.recordVisit(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
+            return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
+    }
+
 
 }

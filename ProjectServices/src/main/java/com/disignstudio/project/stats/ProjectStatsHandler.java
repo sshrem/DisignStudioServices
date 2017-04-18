@@ -27,16 +27,18 @@ public class ProjectStatsHandler {
     private IViewSupplierDao viewSupplierDao;
     private IFacebookShareDao facebookShareDao;
     private IVideoViewDao videoViewDao;
+    private IVisitDao visitDao;
     private ICacheClient cacheClient;
     private ProjectCacheLoader projectCacheLoader;
     private ExecutorService executorService;
 
     @Inject
-    public ProjectStatsHandler(IImagingViewDao imagingViewDao, IViewSupplierDao viewSupplierDao, IUserActionDao userActionDao, IFacebookShareDao facebookShareDao, IVideoViewDao videoViewDao, ICacheClient cacheClient, ProjectCacheLoader projectCacheLoader) {
+    public ProjectStatsHandler(IImagingViewDao imagingViewDao, IViewSupplierDao viewSupplierDao, IUserActionDao userActionDao, IFacebookShareDao facebookShareDao, IVideoViewDao videoViewDao, IVisitDao visitDao, ICacheClient cacheClient, ProjectCacheLoader projectCacheLoader) {
         this.imagingViewDao = imagingViewDao;
         this.userActionDao = userActionDao;
         this.facebookShareDao = facebookShareDao;
         this.videoViewDao = videoViewDao;
+        this.visitDao = visitDao;
         this.cacheClient = cacheClient;
         this.projectCacheLoader = projectCacheLoader;
         this.executorService = Executors.newFixedThreadPool(10);
@@ -144,6 +146,23 @@ public class ProjectStatsHandler {
                 facebookShareDao.insert(new FacebookShare(System.currentTimeMillis(), req.getUserId(), req.getEntrepreneurUserId(), projectData.getEntrepreneurCachedData().getId(),
                         req.getProjectId(), projectData.getCountryId(), projectData.getCityId(), req.getApartmentTemplateId(), req.getRoomId(), numOfRooms, remoteAddr,
                         req.getDesignId(), userAgent));
+            } catch (Exception e) {
+                logger.error("Failed to register user action", e);
+            }
+            return null;
+        });
+
+
+    }
+
+    public void recordVisit(VisitRequest req, String remoteAddr, String userAgent) {
+        executorService.submit((Callable<Void>) () -> {
+            try {
+                ProjectCachedData projectData = loadProjectData(req.getProjectId());
+
+                visitDao.insert(new Visit(System.currentTimeMillis(), req.getPage(), req.getUserId(), req.getEntrepreneurUserId(), projectData.getEntrepreneurCachedData().getId(),
+                        req.getProjectId(), projectData.getCountryId(), projectData.getCityId(), remoteAddr,
+                         userAgent));
             } catch (Exception e) {
                 logger.error("Failed to register user action", e);
             }

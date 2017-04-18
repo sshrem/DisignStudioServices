@@ -60,6 +60,7 @@ public class ProjectServicesServerModule implements Module {
         binder.bind(IVideoDetailsDao.class).to(VideoDetailsDaoImpl.class);
         binder.bind(IFacebookShareDao.class).to(FacebookShareDaoImpl.class);
         binder.bind(IVideoViewDao.class).to(VideoViewDaoImpl.class);
+        binder.bind(IVisitDao.class).to(VisitDaoImpl.class);
         binder.bind(Cloudinary.class).toInstance(new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", configurationProvider.provideProperty("cloudinary.cloud_name"),
                 "api_key", configurationProvider.provideProperty("cloudinary.api_key"),
