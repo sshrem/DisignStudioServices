@@ -7,9 +7,12 @@ import com.disignstudio.project.mongo.pojo.Count;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 /**
  * Created by shrem on 4/18/17.
@@ -28,17 +31,18 @@ public abstract class MongoDao<T> {
     }
 
     public CollectionStats getStats(Long projectId){
-        Count viewCount = getTotalCount();
-        Count userCount = getUserCount("userId");
-        Count entrepreneurUserCount = getUserCount("entrepreneurUserId");
-        Average averagePerUser = getAveragePerUser("userId");
-        Average averagePerEntrepreneurUser = getAveragePerUser("entrepreneurUserId");
+        Count viewCount = getTotalCount(projectId);
+        Count userCount = getUserCount(projectId, "userId");
+        Count entrepreneurUserCount = getUserCount(projectId, "entrepreneurUserId");
+        Average averagePerUser = getAveragePerUser(projectId, "userId");
+        Average averagePerEntrepreneurUser = getAveragePerUser(projectId, "entrepreneurUserId");
         return new CollectionStats(viewCount.getCount(), userCount.getCount(), entrepreneurUserCount.getCount(),
                 averagePerUser.getAvg(), averagePerEntrepreneurUser.getAvg());
     }
 
-    private Count getTotalCount() {
+    private Count getTotalCount(Long projectId) {
         TypedAggregation<VideoView> aggregation = newAggregation(VideoView.class,
+                match( Criteria.where("projectId").is(projectId) ),
                 group("projectId").count().as("count")
         );
 
@@ -50,8 +54,9 @@ public abstract class MongoDao<T> {
         return new Count(0L, 0L);
     }
 
-    private Count getUserCount(String userId) {
+    private Count getUserCount(Long projectId, String userId) {
         TypedAggregation<VideoView> aggregation = newAggregation(VideoView.class,
+                match( Criteria.where("projectId").is(projectId) ),
                 group(userId).count().as("count"),
                 group().count().as("count")
         );
@@ -64,7 +69,7 @@ public abstract class MongoDao<T> {
         return new Count(0L, 0L);
     }
 
-    private Average getAveragePerUser(String userId) {
+    private Average getAveragePerUser(Long projectId, String userId) {
         TypedAggregation<VideoView> aggregation = newAggregation(VideoView.class,
                 group(userId).count().as("count"),
                 group().avg("count").as("avg")
