@@ -1,5 +1,6 @@
 package com.disignstudio.project.mongo.dao;
 
+import com.disignstudio.project.api.response.CollectionStats;
 import com.disignstudio.project.mongo.bean.FacebookShare;
 
 /**
@@ -7,4 +8,5 @@ import com.disignstudio.project.mongo.bean.FacebookShare;
  */
 public interface IFacebookShareDao {
     public void insert(FacebookShare data);
+    CollectionStats getStats(Long projectId);
 }

@@ -2,6 +2,8 @@ package com.disignstudio.project.stats;
 
 import com.disignstudio.common.cache.ICacheClient;
 import com.disignstudio.project.api.request.*;
+import com.disignstudio.project.api.response.ProjectStats;
+import com.disignstudio.project.api.response.CollectionStats;
 import com.disignstudio.project.cache.ProjectCacheLoader;
 import com.disignstudio.project.cache.pojo.ApartmentTemplateCachedData;
 import com.disignstudio.project.cache.pojo.ProjectCachedData;
@@ -170,5 +172,12 @@ public class ProjectStatsHandler {
         });
 
 
+    }
+
+    public ProjectStats getProjectStats(Long projectId) {
+        CollectionStats videoViewStats = videoViewDao.getStats(projectId);
+        CollectionStats visitStats = visitDao.getStats(projectId);
+        CollectionStats facebookShareStats = facebookShareDao.getStats(projectId);
+        return new ProjectStats(videoViewStats, visitStats, facebookShareStats);
     }
 }

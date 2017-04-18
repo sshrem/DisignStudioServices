@@ -7,16 +7,15 @@ import org.springframework.data.mongodb.core.MongoOperations;
 /**
  * Created by shrem on 4/9/17.
  */
-public class VideoViewDaoImpl implements IVideoViewDao {
-    private MongoOperations mongoOperation;
+public class VideoViewDaoImpl extends MongoDao<VideoView>  implements IVideoViewDao {
+    public static final String COLLECTION_NAME = "video_view";
 
     @Inject
     public VideoViewDaoImpl(MongoOperations mongoOperation) {
-        this.mongoOperation = mongoOperation;
+        super(mongoOperation);
     }
 
-    @Override
-    public void insert(VideoView data) {
-        mongoOperation.insert(data);
+    public String getCollectionName() {
+        return COLLECTION_NAME;
     }
 }

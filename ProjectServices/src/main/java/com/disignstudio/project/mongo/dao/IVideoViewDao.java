@@ -1,5 +1,6 @@
 package com.disignstudio.project.mongo.dao;
 
+import com.disignstudio.project.api.response.CollectionStats;
 import com.disignstudio.project.mongo.bean.VideoView;
 
 /**
@@ -7,4 +8,6 @@ import com.disignstudio.project.mongo.bean.VideoView;
  */
 public interface IVideoViewDao {
     public void insert(VideoView data);
+
+    CollectionStats getStats(Long projectId);
 }

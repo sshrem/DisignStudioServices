@@ -7,17 +7,17 @@ import org.springframework.data.mongodb.core.MongoOperations;
 /**
  * Created by shrem on 4/9/17.
  */
-public class FacebookShareDaoImpl implements IFacebookShareDao {
-
-    private MongoOperations mongoOperation;
+public class FacebookShareDaoImpl extends MongoDao<FacebookShare>  implements IFacebookShareDao {
+    public static final String COLLECTION_NAME = "visits";
 
     @Inject
     public FacebookShareDaoImpl(MongoOperations mongoOperation) {
-        this.mongoOperation = mongoOperation;
+        super(mongoOperation);
     }
 
     @Override
-    public void insert(FacebookShare data) {
-        mongoOperation.insert(data);
+    protected String getCollectionName() {
+        return COLLECTION_NAME;
     }
+
 }

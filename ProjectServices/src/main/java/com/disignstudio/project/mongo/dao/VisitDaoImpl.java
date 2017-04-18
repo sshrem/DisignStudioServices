@@ -7,16 +7,16 @@ import org.springframework.data.mongodb.core.MongoOperations;
 /**
  * Created by shrem on 4/18/17.
  */
-public class VisitDaoImpl implements IVisitDao {
-    private MongoOperations mongoOperation;
+public class VisitDaoImpl extends MongoDao<Visit> implements IVisitDao {
+    public static final String COLLECTION_NAME = "visits";
 
     @Inject
     public VisitDaoImpl(MongoOperations mongoOperation) {
-        this.mongoOperation = mongoOperation;
+        super(mongoOperation);
     }
 
     @Override
-    public void insert(Visit data) {
-        mongoOperation.insert(data);
+    protected String getCollectionName() {
+        return COLLECTION_NAME;
     }
 }

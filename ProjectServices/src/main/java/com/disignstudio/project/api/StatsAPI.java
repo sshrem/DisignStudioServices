@@ -2,16 +2,14 @@ package com.disignstudio.project.api;
 
 import com.codahale.metrics.annotation.Timed;
 import com.disignstudio.project.api.request.*;
+import com.disignstudio.project.api.response.ProjectStats;
 import com.disignstudio.project.stats.ProjectStatsHandler;
 import com.disignstudio.web.response.DesignStudioResponse;
 import com.disignstudio.web.response.DesignStudioResponseBuilder;
 import com.google.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -106,6 +104,19 @@ public class StatsAPI {
         try {
             statsHandler.recordVisit(reqData, request.getRemoteAddr(), request.getHeader("User-Agent"));
             return responseBuilder.build(DesignStudioResponse.SUCCESS_MSG);
+        } catch (Exception e) {
+            return responseBuilder.error();
+        }
+    }
+
+    @GET
+    @Path("/projectStats")
+    @Timed(name = "projectStatsRequests", absolute = true)
+    public Response projectStats(@QueryParam("id") Long projectId) {
+
+        try {
+            ProjectStats stats = statsHandler.getProjectStats(projectId);
+            return responseBuilder.build(stats);
         } catch (Exception e) {
             return responseBuilder.error();
         }
