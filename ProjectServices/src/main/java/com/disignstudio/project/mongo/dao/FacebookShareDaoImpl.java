@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
  * Created by shrem on 4/9/17.
  */
 public class FacebookShareDaoImpl extends MongoDao<FacebookShare>  implements IFacebookShareDao {
-    public static final String COLLECTION_NAME = "visits";
+    public static final String COLLECTION_NAME = "facebook_share";
 
     @Inject
     public FacebookShareDaoImpl(MongoOperations mongoOperation) {
