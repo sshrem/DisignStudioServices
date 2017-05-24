@@ -68,6 +68,7 @@ public class ProjectsAPI {
             MobileDesignsResponse data = designsResponseBuilder.build(request);
             return responseBuilder.build(data);
         } catch (Exception e) {
+            e.printStackTrace();
             return responseBuilder.error();
         }
     }
@@ -81,6 +82,7 @@ public class ProjectsAPI {
             MobileDesignFiltersResponse responseData = designsFiltersRequestHandler.execute(request);
             return responseBuilder.build(responseData);
         } catch (Exception e) {
+            e.printStackTrace();
             return responseBuilder.error();
         }
     }

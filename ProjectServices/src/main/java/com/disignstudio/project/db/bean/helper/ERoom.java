@@ -11,7 +11,8 @@ public enum ERoom {
 
     BEDROOM(1),
     LIVINGROOM(2),
-    BATHROOM(3);
+    BATHROOM(3),
+    KITCHEN(4);
 
     private static Map<Integer, ERoom> mapIdToRoom;
     private int id;

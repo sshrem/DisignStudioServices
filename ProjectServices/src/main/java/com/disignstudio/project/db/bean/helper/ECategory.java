@@ -6,7 +6,8 @@ package com.disignstudio.project.db.bean.helper;
 public enum ECategory {
 
     FLOORING(1000),
-    CLADDING(2000);
+    CLADDING(2000),
+    KITCHEN_CUPBOARD(3000);
 
     private final int id;
 

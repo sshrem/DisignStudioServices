@@ -17,7 +17,7 @@ import java.io.FileReader;
  */
 public class DesignsUploader {
 
-    private static final String FILE_NAME = "/Users/sshrem/dev/ds/designs.tsv";
+    private static final String FILE_NAME = "/Users/shrem/dev/ds/designs.tsv";
 
     private IApartmentTemplateDao apartmentTemplateDao;
     private IDesignDao designDao;
