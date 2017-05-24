@@ -22,9 +22,9 @@ DisignStudio:
     redirect.imaging-template: <html><head><title>$TITLE$</title></head><body><script type="text/javascript">window.location = "$URL$"</script></body></html>
     project.num.designs.to.serve: 20
   [dev]:
-    mysql.rw.url: jdbc:mysql://localhost/dev2
+    mysql.rw.url: jdbc:mysql://127.0.0.1:3306/dev
     mysql.rw.username: root
-    mysql.rw.password: dsdev
+    mysql.rw.password: 2GD3HpbJaSqd
     mongodb.stats.uri: mongodb://localhost/disignstudio
     redirect.base.url: http://localhost:8080/api/redirect/imaging?pId=%d&atId=%d&dId=%d&src=%s
   [prod]:
