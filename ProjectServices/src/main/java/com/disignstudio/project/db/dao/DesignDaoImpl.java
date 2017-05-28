@@ -47,12 +47,13 @@ public class DesignDaoImpl implements IDesignDao {
             return design.getId();
         } else {
             SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate).withTableName(TABLE_NAME).usingColumns("dsds_designer_id",
-                    "dsds_apartment_template_id", "dsds_imaging_code", "dsds_title").usingGeneratedKeyColumns("dsds_id");
+                    "dsds_apartment_template_id", "dsds_imaging_code", "dsds_title", "dsds_facebook_video_url").usingGeneratedKeyColumns("dsds_id");
             Map<String, Object> insertParameters = new HashMap<>();
             insertParameters.put("dsds_designer_id", design.getDesignerId());
             insertParameters.put("dsds_apartment_template_id", design.getApartmentTemplateId());
             insertParameters.put("dsds_imaging_code", design.getImagingCode());
             insertParameters.put("dsds_title", design.getTitle());
+            insertParameters.put("dsds_facebook_video_url", design.getFacebookVideoUrl());
             Number generatedId = insert.executeAndReturnKey(insertParameters);
             return generatedId.longValue();
         }
