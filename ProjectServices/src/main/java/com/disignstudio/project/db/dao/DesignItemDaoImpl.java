@@ -3,8 +3,13 @@ package com.disignstudio.project.db.dao;
 import com.disignstudio.project.db.bean.DesignItem;
 import com.disignstudio.project.db.mapper.DesignItemRowMapper;
 import com.google.inject.Inject;
+import org.springframework.jdbc.core.ArgumentPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.sql.Types;
@@ -20,6 +25,7 @@ public class DesignItemDaoImpl implements IDesignItemDao {
     private static final String TABLE_NAME = "dsdi_design_items";
     private static final String UPDATE_DESIGN_ITEM_QUERY = "update dsdi_design_items set dsdi_design_id = ? ,dsdi_offering_id = ? ,dsdi_room_id = ? where dsdi_id = ?";
     private static final String FIND_DESIGN_ITEM_BY_DESIGN_QUERY = "select * from dsdi_design_items where dsdi_design_id = ?";
+    private static final String FIND_DESIGN_WITH_DATA_ITEM_BY_DESIGN_QUERY = "select * from dsdi_design_items where dsdi_design_id IN (:ids)";
 
     private JdbcTemplate jdbcTemplate;
     private RowMapper<DesignItem> rowMapper;
@@ -56,5 +62,17 @@ public class DesignItemDaoImpl implements IDesignItemDao {
         return jdbcTemplate.query(FIND_DESIGN_ITEM_BY_DESIGN_QUERY,
                 new Object[]{designId},
                 new int[]{Types.BIGINT}, rowMapper);
+    }
+
+    @Override
+    public List<DesignItem> findByDesignIds(List<Long> designIds){
+
+
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("ids", designIds);
+
+        return namedParameterJdbcTemplate.query(FIND_DESIGN_WITH_DATA_ITEM_BY_DESIGN_QUERY, parameters, rowMapper );
+
     }
 }

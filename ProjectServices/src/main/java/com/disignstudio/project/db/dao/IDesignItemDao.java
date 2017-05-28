@@ -12,4 +12,6 @@ public interface IDesignItemDao {
     public long saveOrUpdate(DesignItem item);
 
     public List<DesignItem> findByDesign(long designId);
+
+    public List<DesignItem> findByDesignIds(List<Long> designIds);
 }
