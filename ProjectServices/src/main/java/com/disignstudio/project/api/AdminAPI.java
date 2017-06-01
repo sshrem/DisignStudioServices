@@ -49,6 +49,7 @@ public class AdminAPI {
             designsUploader.upload();
             return responseBuilder.build(null);
         } catch (Exception e) {
+            e.printStackTrace();
             return responseBuilder.error();
         }
     }

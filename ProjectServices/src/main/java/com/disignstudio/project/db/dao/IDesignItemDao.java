@@ -11,6 +11,8 @@ public interface IDesignItemDao {
 
     public long saveOrUpdate(DesignItem item);
 
+    void insertBatch(List<DesignItem> designItems);
+
     public List<DesignItem> findByDesign(long designId);
 
     public List<DesignItem> findByDesignIds(List<Long> designIds);

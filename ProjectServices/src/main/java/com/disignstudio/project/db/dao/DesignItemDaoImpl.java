@@ -1,5 +1,6 @@
 package com.disignstudio.project.db.dao;
 
+import com.disignstudio.project.db.bean.Design;
 import com.disignstudio.project.db.bean.DesignItem;
 import com.disignstudio.project.db.mapper.DesignItemRowMapper;
 import com.google.inject.Inject;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +60,28 @@ public class DesignItemDaoImpl implements IDesignItemDao {
     }
 
     @Override
+    public void insertBatch(final List<DesignItem> designItems){
+
+        String sql = "INSERT INTO dsdi_design_items (dsdi_design_id, dsdi_offering_id, dsdi_room_id)" +
+                " VALUES (:designId, :offeringId, :roomId)";
+
+        List<Map<String, Object>> batchValues = new ArrayList<>(designItems.size());
+        for (DesignItem item : designItems) {
+            batchValues.add(
+                    new MapSqlParameterSource()
+                            .addValue("designId", item.getDesignId())
+                            .addValue("offeringId", item.getOfferingId())
+                            .addValue("roomId", item.getRoomId())
+                            .getValues());
+        }
+
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        namedParameterJdbcTemplate.batchUpdate(sql, batchValues.toArray(new Map[designItems.size()]));
+    }
+
+
+
+    @Override
     public List<DesignItem> findByDesign(long designId) {
         return jdbcTemplate.query(FIND_DESIGN_ITEM_BY_DESIGN_QUERY,
                 new Object[]{designId},
@@ -66,13 +90,10 @@ public class DesignItemDaoImpl implements IDesignItemDao {
 
     @Override
     public List<DesignItem> findByDesignIds(List<Long> designIds){
-
-
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("ids", designIds);
 
         return namedParameterJdbcTemplate.query(FIND_DESIGN_WITH_DATA_ITEM_BY_DESIGN_QUERY, parameters, rowMapper );
-
     }
 }

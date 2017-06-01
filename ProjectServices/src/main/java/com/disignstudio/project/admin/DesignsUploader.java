@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ohadbenporat on 4/10/16.
@@ -40,16 +42,19 @@ public class DesignsUploader {
             br.readLine(); // Skip headers Line
 
             String line = br.readLine();
+            List<DesignItem> designItems = new ArrayList<>();
             while (StringUtils.isNoneBlank(line)) {
-                processLine(line);
+                processLine(line, designItems);
                 line = br.readLine();
             }
+
+            designItemDao.insertBatch(designItems);
         } finally {
             br.close();
         }
     }
 
-    private void processLine(String line) throws Exception {
+    private void processLine(String line, List<DesignItem> designItems) throws Exception {
 
         DesignsRawData data = new DesignsRawData(line);
 
@@ -60,13 +65,7 @@ public class DesignsUploader {
         addDesign(data);
 
         // Add design item
-        addDesignItem(data);
-    }
-
-    private void addDesignItem(DesignsRawData data) {
-
-        DesignItem item = new DesignItem(designId, data.getOfferingId(), data.getRoom());
-        designItemDao.saveOrUpdate(item);
+        designItems.add(new DesignItem(designId, data.getOfferingId(), data.getRoom()));
     }
 
     private void addDesign(DesignsRawData data) throws Exception {
