@@ -5,6 +5,8 @@ import com.disignstudio.project.db.bean.SupplierOffering;
 import com.disignstudio.project.db.mapper.SupplierOfferingRowMapper;
 import com.google.inject.Inject;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.sql.Types;
@@ -20,6 +22,7 @@ public class SupplierOfferingDaoImpl implements ISupplierOfferingDao {
     private static final String TABLE_NAME = "dsso_supplier_offerings";
     private static final String UPDATE_SUPPLIER_OFFERING_QUERY = "update dsso_supplier_offerings set dsso_supplier_id= ? ,dsso_name=?,dsso_description=?,dsso_in_stock=?, dsso_image_code=?, dsso_price = ? where dsso_id = ?";
     private static final String FIND_SUPPLIER_OFFERING_BY_ID_QUERY = "select * from dsso_supplier_offerings where dsso_id = %d";
+    private static final String FIND_SUPPLIER_OFFERINGS_BY_IDS_QUERY = "select * from dsso_supplier_offerings where dsso_id IN (:ids)";
 
     private JdbcTemplate jdbcTemplate;
     private SupplierOfferingRowMapper rowMapper;
@@ -66,4 +69,14 @@ public class SupplierOfferingDaoImpl implements ISupplierOfferingDao {
 
         return result.get(0);
     }
+
+    @Override
+    public List<SupplierOffering> findByIds(List<Long> offeringIds){
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("ids", offeringIds);
+
+        return namedParameterJdbcTemplate.query(FIND_SUPPLIER_OFFERINGS_BY_IDS_QUERY, parameters, rowMapper );
+    }
+
 }

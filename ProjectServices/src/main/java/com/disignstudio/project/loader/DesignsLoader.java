@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -71,17 +72,15 @@ public class DesignsLoader {
         List<DesignItem> designItems = designItemDao.findByDesignIds(designIds);
 
         Map<Long, Supplier> mapSupplierIdToName = Maps.newHashMap();
-        Map<Long, SupplierOffering> idToSupplierOffering = Maps.newHashMap();
         Multimap<Long, DesignItemData> designItemsMap = ArrayListMultimap.create();
 
+        List<Long> offeringIds = designItems.stream().map(DesignItem::getOfferingId).collect(Collectors.toList());
+        List<SupplierOffering> offerings = supplierOfferingDao.findByIds(offeringIds);
+        Map<Long, SupplierOffering> offeringsMap = offerings.stream().collect(Collectors.toMap(SupplierOffering::getId, o -> o));
+
         for (DesignItem item : designItems) {
+            SupplierOffering supplierOffering = offeringsMap.get(item.getOfferingId());
 
-
-            SupplierOffering supplierOffering = idToSupplierOffering.get(item.getOfferingId());
-            if (supplierOffering == null){
-                supplierOffering = supplierOfferingDao.findById(item.getOfferingId());
-                idToSupplierOffering.put(item.getOfferingId(), supplierOffering);
-            }
             Supplier supplier = mapSupplierIdToName.get(supplierOffering.getSupplierId());
             if (supplier == null) {
                 supplier = supplierDao.findById(supplierOffering.getSupplierId());
